@@ -1,0 +1,62 @@
+{% extends 'shop/base.html' %}
+{% load paystack %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Payment</title>
+  
+</head>
+<body>
+
+   <div class="container" style="margin-top:120px; margin-bottom:60px;">
+  <div class="row">
+
+      <div class="col-md-6">
+        <div class="card card-body bg-light">
+            
+            <h2>Order detail</h2>
+            <hr>
+
+            {% for items in filter  %}
+
+
+             <img src="{{items.product.image.url}}" class="img-fluid" width="100px" height="100px">
+
+            <h4 class="mt-2 text-success"><span class="text-dark">Product:</span>  {{ items.product}}</h4>
+            <P>Size: {{ items.size_cloth }} </P>
+            <p>Quantity: {{ items.quantity}}</p>
+            <p>Price: {{items.price }}</p>
+            <p>Address: {{items.order.address}} </p>
+            <p>Country: {{items.order.country.name}} </p>
+           
+            
+            <hr>
+
+            {% endfor %}
+            
+            <p>Total Price before shipping: {{total_cost_before_shipping}} </p>
+            <p class="text-danger">Shipping fee:  ₦1200</p>
+            <hr>           
+            <p> Order total {{total_cost}} </p>
+            
+             {% paystack_button button_class="red" amount=total_cost  email=request.user.email %}
+              <br>
+             
+             <a href="/paystack/delete/{{ order.id }}" onclick="return confirm('Order will be Deleted ! Are you sure?')" class="btn btn-danger"> Cancel Order</a>
+             
+           </div>
+      </div>
+  </div>
+
+</div>
+</body>
+
+
+{% endblock content %}
+</html>

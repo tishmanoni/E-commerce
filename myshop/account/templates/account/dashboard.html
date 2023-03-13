@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<br>
+
+<div class="container" style="margin-top:120px; margin-bottom:60px;">
+  <div class="row">
+
+      <div class="col-md-6">
+        <div class="card card-body bg-light">
+         
+        <h1>Dashboard</h1>
+            <p>Welcome to your dashboard <span class="text-success">{{ request.user.username}}</span>!</p>
+            <p>last login: {{request.user.last_login}}</p>
+              {% comment %} {{ profile.city }} {% endcomment %}
+             {% comment %} <p> address: {{request.user.profile.address}} </p> {% endcomment %}
+            {% comment %} <img src="{{ profile.photo.url }}" width="100px" height="100px" alt=""> {% endcomment %}
+
+         </div>
+      </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+   

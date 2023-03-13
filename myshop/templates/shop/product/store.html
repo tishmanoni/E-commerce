@@ -1,0 +1,138 @@
+{% extends 'shop/base.html' %}
+{% load currency %}
+{% currency_context %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block title %}Store{% endblock %}
+    <link rel="stylesheet" href="http://localhost/external-css/css/navbar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+	
+    <link rel="stylesheet" href="http://localhost/external-css/css/mystyle.css"/>
+    <link rel="stylesheet" href="http://localhost/external-css/css/store-style.css">
+	
+  </head>
+  <body>
+
+    {% block content%}
+
+ <div class="container" style="margin-top:120px; margin-bottom:60px;">
+
+    <div class="row">
+      <div class="col-12">
+        {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}  alert-dismissible fade-show" role="alert">
+            {{ message}}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+
+  
+    
+        </div>
+  {% endfor %}
+
+{% endif %}
+      </div>
+
+      
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-12">
+
+          
+          <div class="jumbotron jumbotron-fluid bg-dark">
+            <div class="container">
+              <h2 style="text-align:center; color:white;">{% if category %}{{ category.name }}{% else %} COLLECTIONS {% endif %}</h2>
+            </div>
+
+          </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="row mt-4">
+     
+      <div class="col-xl-3">
+          <h3>CATEGORIES</h3>
+          <ul class="list-group mt-4 mb-3 my-links">
+          
+            <li class="list-group-item">
+            <a href="{% url "myonlineshop:product_list" %}">All</a>
+         
+            </li>
+            {% for c in categories %}
+            <li class="list-group-item">
+                <a href="{{ c.get_absolute_url }}">
+                {{ c.name }}
+                </a>
+
+            </li>
+            {% endfor %}
+            
+          </ul>
+
+      </div>
+
+      <div class="col-xl-9">
+
+          
+
+          <!-- <h3 class="text-center">{% if category %}{{ category.name }}{% else %} COLLECTIONS {% endif %}</h3> -->
+
+          
+           <div class="row">
+            {% for product in products %}
+            <div class="col-sm-6 col-md-6 col-xl-4 col-6 mt-3 my-product">
+              <a href="{{ product.get_absolute_url }}">
+                  <img src="{% if product.image %}{{ product.image.url }} {% else %}  http://localhost/external-css/img/no_image.png {% endif %}" class="card-img-top" alt="...">
+              </a>   
+                  <p class="text-center mt-3">{{ product.name }}</p>
+                  <h3 class="text-center mt-2 mb-3">{{ product.price|currency:request.session.currency }} {{ request.session.currency }}</h3>
+                  <p class="text-center">
+                  <a href="{{ product.get_absolute_url }} " class="site-btn btn-line hvr-float-shadow">SHOP NOW</a>
+                  </p>
+                  
+
+            </div>
+            {% endfor %}
+            
+            
+
+          </div>
+          
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-5">
+
+      </div>
+
+      <div class="col-7 mt-5">
+     
+        {% include "pagination.html" with page=products %}
+        
+     
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  
+
+                
+         {% endblock  %}
+  </body>
+</html>

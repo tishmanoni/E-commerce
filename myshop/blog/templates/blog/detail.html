@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container" style="margin-top:120px; margin-bottom:60px;">
+  <div class="row">
+
+      <div class="col-md-12">
+        <div class="card card-body bg-light">
+         <h3 class="text-success">{{post_detail.title}}</h3><br>
+        <img src =" {{post_detail.image.url}} ">
+        <br>
+       
+        <p style="text-size:18px"> {{post_detail.body}}</p>
+        <p>By {{post_detail.author}}</p>
+        <p>Date: {{post_detail.created}}<p>
+
+   </div>
+      </div>
+  </div>
+
+</div>
+{% endblock content %}

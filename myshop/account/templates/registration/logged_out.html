@@ -1,0 +1,38 @@
+{% extends "shop/base.html" %}
+{% block title %}Logged out{% endblock %}
+{% block content %}
+
+
+<div class="container">
+   <div class="row"  style="margin-top:140px; margin-bottom:60px;">
+      <div class="col-12">
+        <div class="card bg-light border-secondary mb-3"> 
+          <div class="card-body">
+            <h1>Logged out</h1>
+            <hr>
+            <p>
+              You have been successfully logged out.
+              You can <a href="{% url "login" %}">log-in again</a>.
+            </p>
+      </div>
+        </div>
+      </div>
+
+  
+    </div>
+</div>
+<!-- 
+    <div class="container">
+            <div class="row">
+                <div class="card border-secondary mb-3 " style="max-width: 18rem;">
+                    <div class="card-header">Header</div>
+                    <div class="card-body text-secondary">
+                      <h5 class="card-title">Secondary card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                  </div>
+            </div>
+
+    </div> -->
+    
+{% endblock %}

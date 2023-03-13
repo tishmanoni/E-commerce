@@ -1,0 +1,30 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+{% load currency %}
+
+<div class="container" style="margin-top:120px; margin-bottom:60px;">
+  <div class="row">
+
+      <div class="col-md-6">
+        <div class="card card-body bg-light">
+
+
+           <p> Order id: {{ order_detail.order_id}}</p>
+            <p> Product: {{ order_detail.product}}</p>
+            <p>Size: {{ order_detail.size_cloth}}</p>
+            <p> Quantity: {{ order_detail.quantity}} </p>
+            <p>Price: {{order_detail.price|currency:request.session.currency }} {{ request.session.currency }} x{{ order_detail.quantity}}  </p>
+            <hr>
+            <p class="text-danger">Shipping fee: ₦1200 </p>
+           <hr>
+            <p> Total Price: {{order_detail.order.get_total_cost_shipping|currency:request.session.currency }} {{ request.session.currency }}</p>
+            <p>Time ordered: {{order_detail.order.created}} </p>
+           <p> Address: {{order_detail.order.address}}</p>
+           {% comment %} <p>Paid: {{}} </p> {% endcomment %}
+
+        </div>
+      </div>
+  </div>
+
+</div>
+{% endblock content %}

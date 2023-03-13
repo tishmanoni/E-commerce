@@ -1,0 +1,162 @@
+{% extends 'shop/base.html' %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+    <link rel="stylesheet" href="http://localhost/external-css/css/navbar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+	
+    <link rel="stylesheet" href="http://localhost/external-css/css/mystyle.css"/>
+	
+  </head>
+  <body>
+
+    {% block content%}
+    	
+
+        <div class="first-section" style="margin-top:120px;">
+            <div class="container">
+                <div class="row mt-4 mb-4">
+                    <div class="col-xl-3 category">
+                        <h2>Categories</h2>
+                        <ul style="list-style:none">
+                            <li {% if not category %}class="selected"{% endif %}>
+                                <a href="{% url "myonlineshop:product_list" %}" class="btn btn-success mb-3" style="color:white;">All</a>
+                            </li>
+                        {% for c in categories %}
+                            <li {% if category.slug == c.slug %}class="selected"
+                                {% endif %}>
+                                <a href="{{ c.get_absolute_url }}" class="btn btn-success mb-3" style="color:white;">{{ c.name }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+
+                    </div>
+
+                    <div class="col-xl-9">
+                        <h2 class="text-center">{% if category %}{{ category.name }}{% else %} Products {% endif %}</h2>
+                        
+                        <div class="row">
+                        {% for product in products %}
+                                <div class="col-sm-6 col-md-6 col-xl-4 col-6">
+                                    
+                                <div class="card shadow-sm mt-3 cards">
+                                
+                                    
+                                    
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <img src="{% if product.image %}{{ product.image.url }} {% else %}  http://localhost/external-css/img/no_image.png {% endif %}" class="card-img-top" alt="...">
+                                
+                                    <div class="card-body ">
+                                        <p class="pt-2 card-title bg-primary text-center pb-3">
+                                            <a href="{{ product.get_absolute_url }} " style="color:white; font-size:20px">{{ product.name }}</a>
+                                        </p>
+                                        <p class="pt-2 text-center bg-success pb-3" style="color:white;">
+                                            ${{ product.price }}
+                                        </p>
+                                    </div>
+                                
+                                </div>
+                                
+                            </div>
+
+                        {% endfor %}
+                        
+                        </div>
+
+                                
+                    </div>
+
+                        
+                </div>
+            </div>
+
+        </div>
+
+
+
+ <div class="container">
+    <div class="row mt-4">
+      <div class="col-xl-3">
+          <h3>CATEGORIES</h3>
+          <ul class="list-group mt-4 mb-3">
+          
+            <li {% if not category %} class="list-group-item active"{% endif %}>
+            <a href="{% url "myonlineshop:product_list" %}" style="color:white;" >All</a>
+         
+            </li>
+            {% for c in categories %}
+            <li class="list-group-item">Cloth</li>
+            
+          </ul>
+
+      </div>
+
+      <div class="col-xl-9">
+
+
+
+          <h3 class="text-center push-down">PRODUCTS</h3>
+            <div class="row">
+            <div class="col-sm-6 col-md-6 col-xl-4 col-6 mt-3 my-product">
+                <img src="img\Mens-Standard-Fit-Crew-T-Shirt01-600x764.jpg" class="card-img-top" alt="">
+                <p class="text-center mt-3">RED SHIRT</p>
+                <h3 class="text-center">$15000</h3>
+                <p class="text-center">
+                <a href="#" class="site-btn btn-line">SHOP NOW</a>
+                </p>
+
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-xl-4 col-6 mt-3 my-product">
+                <img src="img\Mens-Standard-Fit-Crew-T-Shirt01-600x764.jpg" class="card-img-top" alt="">
+                <p class="text-center mt-3">RED SHIRT</p>
+                <h3 class="text-center">$15000</h3>
+                <p class="text-center">
+                <a href="#" class="site-btn btn-line">SHOP NOW</a>
+                </p></a>
+
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-xl-4 col-6 mt-3 my-product">
+                <img src="img\Mens-Standard-Fit-Crew-T-Shirt01-600x764.jpg" class="card-img-top" alt="">
+                <p class="text-center mt-3">RED SHIRT</p>
+                <h3 class="text-center">$15000</h3>
+                <p class="text-center">
+                <a href="#" class="site-btn btn-line">SHOP NOW</a>
+                </p>
+
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-xl-4 col-6 mt-3 my-product">
+                <img src="img\Mens-Standard-Fit-Crew-T-Shirt01-600x764.jpg" class="card-img-top" alt="">
+                <p class="text-center mt-3">RED SHIRT</p>
+                <h3 class="text-center">$15000</h3>
+                <p class="text-center">
+                <a href="#" class="site-btn btn-line">SHOP NOW</a>
+                </p>
+
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-xl-4 col-6 mt-3 my-product">
+                <img src="img\5.jpg" class="card-img-top" alt="">
+                <p class="text-center mt-3">RED SHIRT</p>
+                <h3 class="text-center">$15000</h3>
+                <p class="text-center">
+                <a href="#" class="site-btn btn-line">SHOP NOW</a>
+                </p>
+
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+
+                
+            {% endblock  %}
+  </body>
+</html>

@@ -1,0 +1,55 @@
+{% extends "shop/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Search{% endblock %}
+{% block content %}
+
+
+
+
+<div class="container" style="margin-top:120px; margin-bottom:60px;">
+  <div class="row">
+
+    <div class="col-xl-12">
+        <div class="card card-body bg-light">
+
+            {% if query %}
+                <h2>Product containing "{{ query }}"</h2>
+                <h3>
+                {% with results.count as total_results %}
+                    Found {{ total_results }} result{{ total_results|pluralize }}
+                {% endwith %}
+                </h3>
+
+            <div class="row mt-3">
+             {% for product in results %}
+
+            <div class="card ml-5" style="width: 19rem;">
+                 <a href="{{ product.get_absolute_url }}">
+                            <img src="{% if product.image %}{{ product.image.url }} {% else %}  http://localhost/external-css/img/no_image.png {% endif %}" class="card-img-top" alt="...">
+                        </a>
+                <div class="card-body my-product">
+                    <h5 class="card-title text-center"><a href="{{ product.get_absolute_url }}" >{{ product.name }}</a></h5>
+                    <p class="card-text text-center">${{ product.price }}</p>
+                    <p class="text-center"><a href="{{ product.get_absolute_url }} " class="site-btn btn-line">SHOP NOW</a></p>
+                </div>
+            </div>
+             {% empty %}
+                <h5 class="ml-3">There are no results for your query.</h5>
+            {% endfor %}
+             </div>
+           
+                <h2 class="ml-2 mt-3"><a href="{% url "myonlineshop:post_search" %}">Search again</a></h2>
+            {% else %}
+                <h2>Search for products</h2>
+                <form method="get">
+                {{ form|crispy }}
+                <input type="submit" class="btn btn-primary btn-lg" value="Search">
+                </form>
+            {% endif %}
+  
+        </div>
+      </div>
+  </div>
+
+</div>      
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "shop/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Thank you
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center" style="margin-top:150px; margin-bottom:60px;">
+      <div class="col-sm-6">
+        <div class="card bg-light shadow-lg"> 
+          <div class="card-body">
+            <h2>Thank you</h2>
+            <p>Your order has been successfully completed. Your order number is
+            <strong>{{ order.id }}</strong>.</p>
+
+            
+
+            </div>
+        </div>
+      </div>
+
+
+      
+      
+
+  
+    </div>
+{% endblock %}

@@ -1,0 +1,370 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load currency %}
+{% currency_context %}
+
+{% block content %}
+	<!-- Page -->
+		<div class="page-area product-page spad" style="margin-top:60px">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<figure>
+							<img class="product-big-img" src= "{% if product.image%}{{product.image.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}" width="400px" height="500px"  alt="">
+						</figure>
+						<div class="product-thumbs">
+							<div class="product-thumbs-track">
+
+
+
+								<div class="pt" data-imgbigurl="{% if product.image%}{{product.image.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}"><img src="{% if product.image%}{{product.image.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}" alt=""></div>
+								<div class="pt" data-imgbigurl="{% if product.slider1%}{{product.slider1.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}"><img src="{% if product.slider1%}{{product.slider1.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}" alt=""></div>
+								<div class="pt" data-imgbigurl="{% if product.slider2%}{{product.slider2.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}"><img src="{% if product.slider2%}{{product.slider2.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}" alt=""></div>
+								<div class="pt" data-imgbigurl="{% if product.slider3%}{{product.slider3.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}"><img src="{% if product.slider3%}{{product.slider3.url}}{% else %} http://localhost/external-css/img/no_image.png {% endif %}" alt=""></div>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="product-content">
+							<h2>{{product.name}} </h2>
+							<div class="pc-meta">
+								<h4 class="price mb-2">{{ product.price|currency:request.session.currency }} {{ request.session.currency }}</h4>
+								<div class="product-rating">
+                                    <i class="fa fa-star{% if product.avaregereview < 1%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 2%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 3%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 4%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 5%}-o empty{% endif%}"></i>
+                                    {{ product.avaregereview |stringformat:".2f"}}
+                                </div>
+                                <a href="#3-tab"> {{ product.countreview}}  Review(s) / Add Review</a>
+								{% comment %} {% if messages %}
+										{% for message in messages %}
+											<div class="alert alert-{{ message.tags }}  alert-dismissible fade-show" role="alert">
+											{{ message}}
+											<button type="button" class="close" data-dismiss="alert">&times;</button>
+
+										</div>
+									{% endfor %}
+
+								{% endif %} {% endcomment %}
+
+							</div>
+
+
+
+
+								<form action="{% url "cart:cart_add" product.id %}" method="post">
+
+										{% if product.quantity > 0 %}
+										<div id="div_id_quantity" class="form-group"> <label for="id_quantity" class=" requiredField">
+												Quantity<span class="asteriskField">*</span> </label>
+												<div class="">
+													<select name="quantity" class="select form-control" id="id_quantity">
+													<option value="1">1</option>
+													<option value="2">2</option>
+														<option value="3">3</option>
+
+													</select>
+												</div>
+										</div>
+										{% else %}
+										<div id="div_id_quantity" class="form-group" style="display:none;">
+										<label for="id_quantity" class=" requiredField">
+												Quantity<span class="asteriskField">*</span> </label>
+												<div class="">
+													<select name="quantity" class="select form-control" id="id_quantity" disabled>
+													<option value="1">0</option>
+													<option value="2">2</option>
+														<option value="3">3</option>
+
+													</select>
+												</div>
+										</div>
+
+										{% endif %}
+
+										<input type="hidden" name="override" value="False" id="id_override">
+									<div id="div_id_size_cloth" class="form-group">
+
+											{% if product.variant == 'Size' %}
+												<label for="id_size_cloth" class="">
+																Size:
+												</label>
+											<div class="">
+
+												<select name="size_cloth" class="select form-control" id="id_size_cloth">
+													{% comment %} <option value="none">None</option> {% endcomment %}
+													<option value="S">Small</option>
+													<option value="L">Large</option>
+													<option value="XL">Extra Large</option>
+													<option value="39">39</option>
+													<option value="40">40</option>
+													<option value="41">41</option>
+													<option value="42">42</option>
+
+												</select>
+												{% endif %}
+
+											</div>
+
+
+
+									</div>
+
+
+									<div id="div_id_size_cloth" class="form-group">
+
+													{% if product.variant == 'None' %}
+														<label for="id_size_cloth" class="">
+																		Size:
+														</label>
+												<div class="">
+{% comment %}
+														<select name="size_cloth" class="select form-control" id="id_size_cloth">
+															<option value="None">None</option>
+															<option value="L">Large</option>
+															<option value="XL">Extra Large</option>
+
+														</select> {% endcomment %}
+
+																<select name="size_cloth" class="select form-control" id="id_size_cloth">
+																<option value="None">None</option>
+																{% comment %} <option value="S">Small</option>
+																<option value="L">Large</option>
+																<option value="XL">Extra Large</option>
+																<option value="39">39</option>
+																<option value="40">40</option>
+																<option value="41">41</option>
+																<option value="42">42</option> {% endcomment %}
+
+												</select>
+													{% endif %}
+
+												</div>
+
+
+
+									</div>
+
+											{% csrf_token %}
+											{% if product.quantity > 0 %}
+												<input type="submit" value="Add to cart" class="btn btn-warning mb-2">
+
+												{% else %}
+													<input type="submit" disabled value="Out of Stock" class="btn btn-danger mb-2">
+
+											{% endif %}
+
+								</form>
+
+
+
+
+
+
+
+
+											<p><strong>Availability:</strong> {% if product.quantity > 0  %} In Stock {% else %}Currently Out of Stock {% endif %}</p>
+
+											<h4>Category</h4>
+											<p>
+												<a href="{{ product.category.get_absolute_url}}" class="text-warning">
+													{{product.category}}
+												</a>
+											</p>
+
+						</div>
+
+
+
+
+
+
+				</div>
+
+
+			</div>
+
+
+
+
+
+
+
+
+				<div class="container">
+
+							<div class="product-details">
+								<div class="row">
+									<div class="col-lg-10 offset-lg-1">
+										<ul class="nav" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Description</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Additional information</a>
+											</li>
+											<li class="nav-item">
+
+												<a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews({{ product.countreview}})</a>
+
+											</li>
+										</ul>
+										<div class="tab-content">
+											<!-- single tab content -->
+													<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+														<p>{{product.description|safe }} </p>
+													</div>
+													<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+														<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+													</div>
+
+
+												<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
+
+
+													{% for rs in comments %}
+													<div class="col-md-6 mb-3">
+
+
+															<div class="card">
+																<div class="card-body shadow-lg p-3  bg-white rounded">
+
+																	<p>
+																		<span class="text-danger"> Review  by</span> {{ rs.user.first_name }} {{ rs.updated }}
+																		</p>
+																		<p><span class="text-danger"> Subject</span>: {{ rs.subject }} </p>
+																		<p><span class="text-danger"> Comment</span>:: {{ rs.comment }} </p>
+																		<i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+																								<i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+																								<i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+																								<i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+																								<i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
+
+
+																</div>
+
+															</div>
+
+
+
+																	{% comment %}
+																	{% empty %}
+
+																	<h2>Be the first to Comment</h2> {% endcomment %}
+													</div>
+
+
+													{% endfor %}
+
+
+
+
+													<div class="col-md-6">
+																	<h4 class="text-uppercase">Write Your Review</h4>
+																			{% if messages %}
+																				{% for message in messages %}
+																					<div class="alert alert-{{message.tags}}" role="alert">
+																						{{ message }}
+																					</div>
+																				{% endfor %}
+																			{% endif %}
+
+
+
+																	<form class="review-form" action="/addcomment/{{ product.id }}" method="post">
+																		{% csrf_token %}
+																		<div class="form-group">
+																			<input name="subject" class="form-control" type="text" placeholder="Your subject" />
+																		</div>
+																		<div class="form-group">
+																			<textarea name="comment" class="form-control" placeholder="Your review"></textarea>
+																		</div>
+																		<div class="form-group">
+																			<div class="input-rating">
+																				<strong class="text-uppercase">Your Rating: </strong>
+																				<div class="stars">
+																					<input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+																					<input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+																					<input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+																					<input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+																					<input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
+																				</div>
+																			</div>
+																		</div>
+																		{% if user.id is not None %}
+																			<button class="btn btn-success">Submit</button>
+																		{% else %}
+																			You must be logged in to post a review
+
+																		{% endif %}
+																	</form>
+
+
+													</div>
+
+												</div>
+										</div>
+
+
+
+
+									</div>
+								</div>
+							</div>
+				<div>
+
+
+
+
+                    <!--RECOMMEND CODE-->
+
+					<!--{% if recommended_products %}-->
+					<!--		<div class="text-center rp-title">-->
+					<!--			<h3>People who bought this also bought</h3>-->
+					<!--		</div>-->
+
+
+
+					<!--		<div class="row">-->
+					<!--			{% for p in recommended_products %}-->
+					<!--				<div class="col-lg-3">-->
+					<!--					<div class="product-item">-->
+					<!--						<figure>-->
+					<!--							<a href="{{ p.get_absolute_url }}">-->
+					<!--								<img src="{{ p.image.url }}">-->
+					<!--							</a>-->
+					<!--							<div class="pi-meta">-->
+					<!--								<div class="pi-m-left">-->
+					<!--									<img src="http://localhost/external-css/img/icons/eye.png" alt="">-->
+					<!--									<p>quick view</p>-->
+					<!--								</div>-->
+					<!--								<div class="pi-m-right">-->
+					<!--									<img src="http://localhost/external-css/img/icons/heart.png" alt="">-->
+					<!--									<p>save</p>-->
+					<!--								</div>-->
+					<!--							</div>-->
+					<!--						</figure>-->
+					<!--						<div class="product-info">-->
+					<!--							<h6><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></h6>-->
+					<!--							<p>{{ product.price|currency:request.session.currency }} {{ request.session.currency }} </p>-->
+					<!--							<a href="{{ p.get_absolute_url }} " class="site-btn btn-line hvr-float-shadow">SHOP NOW</a>-->
+					<!--						</div>-->
+					<!--					</div>-->
+					<!--				</div>-->
+					<!--				{% endfor %}-->
+
+					<!--		</div>-->
+
+
+					<!--{% endif %}-->
+			</div>
+		</div>
+
+
+
+	<!-- Page end -->
+    {% endblock  %}

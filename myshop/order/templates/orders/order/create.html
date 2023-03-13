@@ -1,0 +1,78 @@
+{% extends "shop/base.html" %}
+{% load crispy_forms_tags %}
+{% load currency %}
+{% block title %}
+  Checkout
+{% endblock %}
+{% block content %}
+
+<br>
+<br>
+  <div class="container">
+    <div class="row justify-content-center " style="margin-top:120px">
+      
+          <div class="col-xl-4 mb-3">
+            <div class="card bg-light p-3">
+            <h4>All orders are processed in NGN. WHILE THE CONTENT OF YOUR CART IS CUREENTLY <span class="text-warning"> {{request.session.currency}},</span>  YOU WILL CHECKOUT USING NGN AT THE MOST CURRENT EXCHANGE RATE </h4>
+          </div>
+          </div>
+       
+
+      <div class="col-lg-6 col-md-12 col-sm-12 col-12 mb-4 col-xl-8">
+        <div class="card bg-light"> 
+          <div class="card-body">
+  
+            <h2 style="font-weight:bolder">Checkout</h2>
+            <!--<div class="order-info">-->
+              <div style="text-align:right">
+              <h3>Your order</h3>
+              <ul style="color:red; list-style:none;">
+                {% for item in cart %}
+                  <li>
+                    {{ item.quantity }} x {{ item.product.name }} {{item.size_cloth}}
+                    
+                    
+                  </li>
+                   <h4>Price: <span class="text-success">{{ item.total_price|currency:request.session.currency }} {{ request.session.currency }}</span> </h4>
+                {% endfor %}
+                <p>Shipping fee: ₦1200</p>
+                 {% if cart.coupon %}
+                <li>
+                  "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+                  <span class="neg">- {{ cart.get_discount|currency:request.session.currency }} {{ request.session.currency }} }}</span>
+                </li>
+              {% endif %}
+              </ul>
+              </div>
+              <button class="btn btn-warning">Total: {{ cart.get_total_price_after_discount_shipping|currency:request.session.currency }} {{ request.session.currency }} </button>
+              <br>
+              <br>
+            <!--</div>-->
+      
+    
+            <form method="post">
+              {{ form|crispy}}
+              <p><input type="submit" class="btn btn-dark btn-lg" value="Continue Checkout "  ></p>
+              {% csrf_token %}
+            </form>
+            <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+              <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+            </svg> -->
+
+          </div>
+        </div>
+      </div>
+
+
+   
+  
+    </div>
+  </div>
+
+
+
+  
+    
+  
+{% endblock %}
