@@ -1,8 +1,8 @@
-Django E-Commerce Web Application Architecture with Docker, AWS ECS, and ELB
+#Django E-Commerce Web Application Architecture with Docker, AWS ECS, and ELB
 
 This is an e-commerce web application built with Django and containerized using Docker. The application is deployed on AWS Elastic Container Service (ECS) with a serverless server of Fargate, and the Docker images are pushed to Elastic Container Registry (ECR). The application is also load balanced using Elastic Load Balancer (ELB).
 
-Architecture Overview
+#Architecture Overview
 The architecture of the e-commerce web application consists of the following components:
 
 Django web application: This is the core of the application, built with the Django web framework. The application interacts with a PostgreSQL database to store and retrieve data.
