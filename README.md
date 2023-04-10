@@ -10,3 +10,5 @@ The architecture of the e-commerce web application consists of the following com
 - **Elastic Container Registry**: The Docker images are pushed to Elastic Container Registry (ECR) to be stored and managed.
 - **Elastic Container Service**: The web application is deployed on Elastic Container Service (ECS) with a serverless server of Fargate, which provides automatic scaling, load balancing, and server management.
 - **Elastic Load Balancer**: The web application is load balanced using Elastic Load Balancer (ELB), which distributes incoming traffic across the ECS containers.
+
+https://tish.pythonanywhere.com/
