@@ -29,7 +29,7 @@ SECRET_KEY = 'sfuh5dy_eirgxyok=s+z#i86ee*(%pka^6xe^)@ypv(=er6cig'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tish.pythonanywhere.com', '127.0.0.1', 'store2.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['tish.pythonanywhere.com', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
